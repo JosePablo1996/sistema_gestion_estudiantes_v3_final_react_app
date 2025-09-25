@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduDashboard Pro</title>
+    
+    <!-- Script para aplicar el tema inmediatamente y evitar flash -->
+    <script>
+        // Aplicar tema inmediatamente al cargar para evitar flash de contenido
+        (function() {
+            const savedSettings = localStorage.getItem('app-settings');
+            const savedTheme = localStorage.getItem('app-theme');
+            let theme = 'light';
+            
+            // Prioridad: app-theme -> app-settings -> valor por defecto
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (savedSettings) {
+                try {
+                    theme = JSON.parse(savedSettings).theme || 'light';
+                } catch (e) {
+                    theme = 'light';
+                }
+            }
+            
+            console.log('Tema detectado al cargar:', theme);
+            
+            // Aplicar el tema inmediatamente al html
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else if (theme === 'auto') {
+                // Auto detectar preferencia del sistema
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+            
+            // Función para aplicar estilos al body cuando esté disponible
+            const applyBodyStyles = () => {
+                if (document.body) {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.body.classList.add('dark');
+                        document.body.style.backgroundColor = '#0f172a'; // bg-gray-900
+                    } else {
+                        document.body.classList.remove('dark');
+                        document.body.style.backgroundColor = '#f8fafc'; // bg-slate-50
+                    }
+                } else {
+                    // Reintentar si el body aún no está disponible
+                    setTimeout(applyBodyStyles, 10);
+                }
+            };
+            
+            // Esperar a que el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', applyBodyStyles);
+            } else {
+                applyBodyStyles();
+            }
+        })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

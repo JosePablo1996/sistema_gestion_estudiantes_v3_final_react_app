@@ -1,0 +1,313 @@
+/* RouteTransition.css - Estilos minimalistas para EduDashboard */
+.edu-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Fondos con efecto glow */
+.edu-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.edu-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+}
+
+.edu-glow-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: edu-glow-move-1 8s ease-in-out infinite;
+}
+
+.edu-glow-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+  bottom: -50px;
+  right: -50px;
+  animation: edu-glow-move-2 6s ease-in-out infinite;
+}
+
+/* Contenedor principal */
+.edu-loading-container {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  text-align: center;
+  min-width: 400px;
+  animation: edu-container-float 3s ease-in-out infinite;
+}
+
+/* Branding - Logo y nombre */
+.edu-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.edu-logo {
+  width: 60px;
+  height: 60px;
+  color: #6366f1;
+  animation: edu-logo-pulse 2s ease-in-out infinite;
+}
+
+.edu-logo-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+}
+
+.edu-title {
+  text-align: left;
+}
+
+.edu-app-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+  line-height: 1;
+}
+
+.edu-app-subtitle {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Sección de progreso */
+.edu-progress-section {
+  width: 100%;
+}
+
+.edu-loading-text {
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.edu-progress-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.edu-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.edu-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.edu-progress-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%);
+  animation: edu-glow-slide 1.5s ease-in-out infinite;
+}
+
+.edu-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.edu-progress-percent {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.edu-progress-status {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Indicadores de actividad */
+.edu-activity-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.edu-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edu-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+  animation: edu-dot-bounce 1.4s ease-in-out infinite;
+}
+
+/* Contenido principal */
+.edu-content-wrapper {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edu-content-wrapper.edu-loading {
+  opacity: 0;
+  transform: scale(0.98);
+  filter: blur(5px);
+}
+
+.edu-content-wrapper.edu-loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* Animaciones */
+@keyframes edu-glow-move-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
+}
+
+@keyframes edu-glow-move-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -30px) scale(1.05);
+  }
+}
+
+@keyframes edu-container-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes edu-logo-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes edu-glow-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes edu-dot-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edu-loading-container {
+    min-width: unset;
+    margin: 1rem;
+    padding: 2rem;
+  }
+  
+  .edu-brand {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .edu-title {
+    text-align: center;
+  }
+  
+  .edu-app-name {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .edu-loading-container {
+    padding: 1.5rem;
+  }
+  
+  .edu-app-name {
+    font-size: 1.75rem;
+  }
+  
+  .edu-loading-text {
+    font-size: 1rem;
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,640 @@
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 50%, #2d1b69 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.splash-container.ready {
+  background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 70%, #2d1b69 100%);
+}
+
+.splash-content {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  width: 90%;
+}
+
+/* Logo Styles - Completamente Renovado */
+.logo-container {
+  position: relative;
+  margin: 0 auto 3rem;
+  width: 160px;
+  height: 160px;
+  perspective: 1000px;
+}
+
+.logo-main {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 0 60px rgba(102, 126, 234, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+
+.logo-main.expanded {
+  transform: scale(1.1) rotateY(180deg);
+  box-shadow: 
+    0 0 100px rgba(102, 126, 234, 0.6),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.logo-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
+}
+
+.logo-main.expanded .logo-text {
+  transform: rotateY(-180deg);
+}
+
+/* Órbitas Animadas */
+.logo-orbits {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: orbitRotate linear infinite;
+}
+
+.orbit-1 {
+  top: -10%;
+  left: -10%;
+  right: -10%;
+  bottom: -10%;
+  animation-duration: 8s;
+  border-color: rgba(102, 126, 234, 0.6);
+}
+
+.orbit-2 {
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  animation-duration: 12s;
+  animation-direction: reverse;
+  border-color: rgba(118, 75, 162, 0.4);
+}
+
+.orbit-3 {
+  top: -30%;
+  left: -30%;
+  right: -30%;
+  bottom: -30%;
+  animation-duration: 16s;
+  border-color: rgba(240, 147, 251, 0.3);
+}
+
+.logo-shine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: shineRotate 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shineRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Title Styles Mejorados */
+.app-title {
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.app-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-main {
+  font-size: 3.2rem;
+  font-weight: 300;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #fff 0%, #a8baff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+
+.title-sub {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+  opacity: 0.9;
+  color: #a8baff;
+}
+
+.title-underline {
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #667eea, transparent);
+  margin: 1rem auto;
+  animation: underlinePulse 2s ease-in-out infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* Progress Indicator - Completamente Renovado */
+.progress-container {
+  margin: 2rem 0 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.progress-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.progress-text {
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.progress-percentage {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 5px;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: progressShimmer 1.5s infinite;
+}
+
+.progress-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
+
+.step.completed {
+  opacity: 1;
+  color: #667eea;
+}
+
+.step-marker {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.4s ease;
+}
+
+.step.completed .step-marker {
+  background: #667eea;
+  transform: scale(1.1);
+}
+
+@keyframes progressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* Botón de Entrar - Completamente Renovado */
+.enter-button-container {
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: buttonReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+
+.enter-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 1.2rem 3rem;
+  border-radius: 60px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  box-shadow: 
+    0 10px 30px rgba(102, 126, 234, 0.4),
+    0 0 0 0 rgba(102, 126, 234, 0.8);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
+}
+
+.enter-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 20px 40px rgba(102, 126, 234, 0.6),
+    0 0 0 10px rgba(102, 126, 234, 0.1);
+  gap: 1.5rem;
+}
+
+.enter-button:active {
+  transform: translateY(-1px);
+}
+
+.button-text {
+  position: relative;
+  z-index: 2;
+}
+
+.button-icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.enter-button:hover .button-icon {
+  transform: translateX(8px) scale(1.2);
+}
+
+.button-arrow {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.button-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(45deg) translate(-20%, -20%);
+  transition: all 0.6s ease;
+}
+
+.enter-button:hover .button-shine {
+  transform: rotate(45deg) translate(20%, 20%);
+}
+
+@keyframes buttonReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fondo Animado */
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+.floating-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: shapeFloat 15s ease-in-out infinite;
+}
+
+.shape-triangle {
+  width: 40px;
+  height: 40px;
+  background: conic-gradient(from 180deg at 50% 50%, #667eea, #764ba2, #f093fb);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #764ba2, transparent);
+  top: 60%;
+  right: 15%;
+  animation-delay: 5s;
+}
+
+.shape-square {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(45deg, #f093fb, #667eea);
+  transform: rotate(45deg);
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 10s;
+}
+
+/* Partículas Flotantes Mejoradas */
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Líneas de Conexión */
+.connection-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+  height: 1px;
+  animation: lineFlow 4s linear infinite;
+}
+
+.line-1 {
+  top: 30%;
+  width: 100px;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.line-2 {
+  top: 60%;
+  width: 150px;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.line-3 {
+  top: 80%;
+  width: 80px;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+/* Animaciones Principales */
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes shapeFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -40px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lineFlow {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(200%); }
+}
+
+/* Responsive Design Mejorado */
+@media (max-width: 768px) {
+  .logo-container {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .logo-text {
+    font-size: 2.5rem;
+  }
+  
+  .title-main {
+    font-size: 2.2rem;
+  }
+  
+  .title-sub {
+    font-size: 1.4rem;
+  }
+  
+  .progress-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .enter-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .orbit-1, .orbit-2, .orbit-3 {
+    display: none; /* Ocultar órbitas en móvil para mejor rendimiento */
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-content {
+    width: 95%;
+  }
+  
+  .title-main {
+    font-size: 1.8rem;
+  }
+  
+  .title-sub {
+    font-size: 1.2rem;
+  }
+  
+  .progress-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+/* Compatibilidad y Fallbacks */
+@supports not (backdrop-filter: blur(20px)) {
+  .logo-main {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 50%, rgba(240, 147, 251, 0.95) 100%);
+  }
+}
+
+/* Prefijos WebKit para mejor compatibilidad */
+@-webkit-keyframes orbitRotate {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-webkit-keyframes particleFloat {
+  0% {
+    -webkit-transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(-100px) rotate(360deg);
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Mejoras de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Estados de focus para accesibilidad */
+.enter-button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Modo oscuro optimizado */
+@media (prefers-color-scheme: dark) {
+  .splash-container {
+    background: linear-gradient(135deg, #0a0a18 0%, #151530 50%, #2a1a5e 100%);
+  }
+}
