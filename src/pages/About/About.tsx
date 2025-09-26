@@ -173,7 +173,7 @@ export const About: React.FC = () => {
           </div>
         </section>
 
-        {/* API Documentation - Mejorado para accesibilidad */}
+        {/* API Documentation - Mejorado con nuevo diseño para métodos */}
         <section aria-labelledby="api-heading" className="mb-10 sm:mb-16">
           <h2 id="api-heading" className="text-xl sm:text-3xl font-black text-white text-center mb-6 sm:mb-10 flex items-center justify-center">
             <ServerIcon className="h-5 w-5 sm:h-7 sm:w-7 mr-2 sm:mr-3 text-green-400" aria-hidden="true" />
@@ -223,28 +223,33 @@ export const About: React.FC = () => {
             {apiEndpoints.map((endpoint, index) => (
               <article 
                 key={index} 
-                className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-600 hover:border-blue-500/30 transition-all duration-300 focus-within:border-blue-500/50"
+                className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-gray-600 hover:border-blue-500/50 transition-all duration-300 focus-within:border-blue-500/70 shadow-lg hover:shadow-xl"
                 role="listitem"
                 tabIndex={0}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2 mb-2 sm:mb-0">
-                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${getMethodColor(endpoint.method)}`}>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
+                  <div className="flex items-center space-x-3 mb-2 sm:mb-0">
+                    <span className={`px-3 py-1.5 rounded-lg text-xs font-bold shadow-md ${getMethodColor(endpoint.method)} border ${getMethodBorderColor(endpoint.method)}`}>
                       {endpoint.method}
                     </span>
-                    <code className="text-xs sm:text-sm font-mono text-gray-200 bg-gray-700 px-2 py-1 rounded">
+                    <code className="text-xs sm:text-sm font-mono text-gray-200 bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-600">
                       {endpoint.path}
                     </code>
                   </div>
-                  <span className="text-xs text-gray-400 bg-gray-700 px-2 py-1 rounded-full">
+                  <span className="text-xs text-gray-300 bg-gray-700/50 px-3 py-1 rounded-full border border-gray-600">
                     {endpoint.response}
                   </span>
                 </div>
-                <p className="text-gray-300 text-xs sm:text-sm mb-1">{endpoint.description}</p>
+                <p className="text-gray-300 text-xs sm:text-sm mb-2 leading-relaxed">{endpoint.description}</p>
                 {endpoint.body && (
-                  <p className="text-xs text-gray-400">
-                    <strong>Cuerpo de la petición:</strong> {endpoint.body}
-                  </p>
+                  <div className="flex items-center space-x-2 mt-2">
+                    <span className="text-xs font-semibold text-gray-400 bg-gray-900/50 px-2 py-1 rounded border border-gray-700">
+                      Body:
+                    </span>
+                    <code className="text-xs text-gray-300 bg-gray-800/50 px-2 py-1 rounded border border-gray-700">
+                      {endpoint.body}
+                    </code>
+                  </div>
                 )}
               </article>
             ))}
@@ -311,8 +316,8 @@ export const About: React.FC = () => {
 
         {/* Footer */}
         <footer className="text-center mt-6 text-gray-500 text-xs sm:text-sm">
-          <p>© 2025 Sistema de Gestión Estudiantil • Desarrollado con tecnologías modernas</p>
-          <p className="mt-1 text-xs">v3.0 • Última actualización: {new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase()} 2025</p>
+          <p>© 2025 Sistema de Gestión Estudiantil</p>
+          <p className="mt-1 text-xs">v3.0 • Última actualización: {new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase()}</p>
         </footer>
       </div>
     </div>
@@ -322,10 +327,21 @@ export const About: React.FC = () => {
 // Función helper para colores de métodos HTTP
 const getMethodColor = (method: string) => {
   switch (method) {
-    case 'GET': return 'bg-green-900/50 text-green-300';
-    case 'POST': return 'bg-blue-900/50 text-blue-300';
-    case 'PUT': return 'bg-yellow-900/50 text-yellow-300';
-    case 'DELETE': return 'bg-red-900/50 text-red-300';
-    default: return 'bg-gray-900/50 text-gray-300';
+    case 'GET': return 'bg-green-900/70 text-green-300';
+    case 'POST': return 'bg-blue-900/70 text-blue-300';
+    case 'PUT': return 'bg-yellow-900/70 text-yellow-300';
+    case 'DELETE': return 'bg-red-900/70 text-red-300';
+    default: return 'bg-gray-900/70 text-gray-300';
+  }
+};
+
+// Función helper para bordes de métodos HTTP
+const getMethodBorderColor = (method: string) => {
+  switch (method) {
+    case 'GET': return 'border-green-700/50';
+    case 'POST': return 'border-blue-700/50';
+    case 'PUT': return 'border-yellow-700/50';
+    case 'DELETE': return 'border-red-700/50';
+    default: return 'border-gray-700/50';
   }
 };
